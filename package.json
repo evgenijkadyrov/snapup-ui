@@ -1,0 +1,71 @@
+{
+  "name": "@evgenijkadyrov/snapup-ui",
+  "version": "0.1.0",
+  "description": "Vue 3 + TypeScript component library (Button, Input, Card) bundled with Rollup.",
+  "type": "module",
+  "license": "MIT",
+  "author": "Evgenij Kadyrov",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/snapup-ui.cjs.js",
+  "module": "./dist/snapup-ui.esm.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/snapup-ui.esm.js",
+      "require": "./dist/snapup-ui.cjs.js"
+    },
+    "./dist/style.css": "./dist/style.css"
+  },
+  "scripts": {
+    "build": "vue-tsc --project tsconfig.json && rollup -c && rm -rf dist/types",
+    "build:analyze": "ANALYZE=true rollup -c",
+    "dev": "rollup -c -w",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint . --ext .vue,.ts",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "vue": "^3.4.0"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^26.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup-plugin-esbuild": "^6.2.1",
+    "esbuild": "^0.23.1",
+    "@storybook/addon-essentials": "^8.2.9",
+    "@storybook/vue3": "^8.2.9",
+    "@storybook/vue3-vite": "^8.2.9",
+    "unplugin-vue": "^6.0.0",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/eslint-config-typescript": "^13.0.0",
+    "@vue/test-utils": "^2.4.6",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.23.0",
+    "jsdom": "^24.1.1",
+    "rollup": "^4.20.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-visualizer": "^5.12.0",
+    "sass": "^1.79.4",
+    "typescript": "~5.4.0",
+    "vitest": "^2.0.5",
+    "vue": "^3.4.29",
+    "vue-tsc": "^2.0.21"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
