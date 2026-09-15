@@ -1,4 +1,4 @@
-# @evgenijkadyrov/snapup-ui
+# @yauheni_front/snapup-ui
 
 Vue 3 + TypeScript component library (`Button`, `Input`, `Card`) bundled with Rollup.
 
@@ -18,27 +18,30 @@ npm run build          # vue-tsc (types) + rollup -c -> dist/
 
 - `dist/snapup-ui.esm.js`, `dist/snapup-ui.cjs.js` — ESM/CJS bundles, `vue` externalized as a peer dependency (not bundled)
 - `dist/index.d.ts` — single bundled declaration file (via `rollup-plugin-dts`)
-- `dist/style.css` — extracted component styles (import separately: `@evgenijkadyrov/snapup-ui/dist/style.css`)
+- `dist/style.css` — extracted component styles (import separately: `@yauheni_front/snapup-ui/dist/style.css`)
 
 Check bundle composition: `npm run build:analyze` (writes `dist/stats.html`).
 
 Check exactly what will be published: `npm pack --dry-run`.
 
-## Publishing to npm (manual steps)
+## Publishing to npm
 
-1. `npm login` (one-time, uses your npm account)
-2. Bump `version` in `package.json` (the `publish` CI job only publishes when the version changed)
-3. `npm run build && npm pack --dry-run` — sanity check the tarball contents
-4. `npm publish --access public` (scoped package, needs `--access public` the first time)
-5. Verify: `npm view @evgenijkadyrov/snapup-ui`
+`0.1.0` is published: [npmjs.com/package/@yauheni_front/snapup-ui](https://www.npmjs.com/package/@yauheni_front/snapup-ui). To cut a new version:
+
+1. Bump `version` in `package.json` (the `publish` CI job only publishes when the version changed)
+2. `npm run build && npm pack --dry-run` — sanity check the tarball contents
+3. `npm publish` (`publishConfig.access: public` in `package.json` already covers the scoped-package case, so no `--access public` flag is needed)
+4. Verify: `npm view @yauheni_front/snapup-ui`
+
+Publishing requires a Granular Access Token with "bypass two-factor authentication" enabled, or a one-time code: `npm publish --otp=123456`.
 
 ### Test the published package
 
 ```bash
 mkdir /tmp/snapup-ui-smoke-test && cd /tmp/snapup-ui-smoke-test
 npm init -y
-npm install @evgenijkadyrov/snapup-ui vue
-# import { Button } from "@evgenijkadyrov/snapup-ui" in a .vue/.ts file and confirm
+npm install @yauheni_front/snapup-ui vue
+# import { Button } from "@yauheni_front/snapup-ui" in a .vue/.ts file and confirm
 # types resolve in your editor and dist/style.css applies the expected styles.
 ```
 
@@ -52,7 +55,7 @@ Two workflows are already committed:
 ### One-time manual setup required
 
 1. Create the GitHub repository and push this project to it.
-2. **NPM token**: generate an npm [automation/publish token](https://www.npmjs.com/settings) for your account, then add it as a repository secret: Settings → Secrets and variables → Actions → New repository secret → name `NPM_TOKEN`.
+2. **NPM token**: generate a Granular Access Token with "bypass two-factor authentication" enabled (read/write on the `@yauheni_front` scope) and add it as a repository secret: Settings → Secrets and variables → Actions → New repository secret → name `NPM_TOKEN`.
 3. **GitHub Pages**: Settings → Pages → Build and deployment → Source → "GitHub Actions". No further config needed; `storybook-pages.yml` handles the rest.
 4. Push to `main` (or merge a PR into it) to trigger both workflows.
 
