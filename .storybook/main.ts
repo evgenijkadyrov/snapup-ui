@@ -14,6 +14,9 @@ const config: StorybookConfig = {
   async viteFinal(viteConfig) {
     viteConfig.plugins ??= [];
     viteConfig.plugins.push(vue());
+    // GitHub Pages serves a project site under /<repo>/, so assets need that
+    // prefix. Set via env so local `npm run storybook` stays at the root.
+    viteConfig.base = process.env.STORYBOOK_BASE ?? "/";
     return viteConfig;
   },
 };
