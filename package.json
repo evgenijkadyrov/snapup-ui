@@ -1,6 +1,6 @@
 {
   "name": "@yauheni_front/snapup-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Vue 3 + TypeScript component library (Button, Input, Card) bundled with Rollup.",
   "type": "module",
   "license": "MIT",
