@@ -1,0 +1,10 @@
+# Temporary probe job: inspect available runners before the real lint/test/vercel-deploy pipeline.
+probe:
+  image: node:20-alpine
+  # tags: [docker]   # uncomment if runners only pick up tagged jobs
+  script:
+    - echo "Runner - $CI_RUNNER_DESCRIPTION | tags - $CI_RUNNER_TAGS | version - $CI_RUNNER_VERSION"
+    - node -v && npm -v
+    - head -2 /etc/os-release
+    - npm view vue version
+    - node -e "fetch('https://api.vercel.com').then(r => console.log('vercel OK, status', r.status)).catch(e => console.log('vercel FAIL', e.message))"
